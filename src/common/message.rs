@@ -6,26 +6,13 @@ use serde::{Deserialize, Serialize};
 pub enum Role {
     System,
     User,
-    Assistant,
-    Tool,
 }
 
 // A single piece of content. Messages can contain multiple content blocks.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(tag = "type", rename_all = "snake_case")]
 pub enum ContentBlock {
-    Text {
-        text: String,
-    },
-    Tool {
-        id: String,
-        name: String,
-        value: serde_json::Value,
-    },
-    ToolResult {
-        tool_id: String,
-        content: String,
-    },
+    Text { text: String },
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -42,9 +29,9 @@ impl Message {
         }
     }
 
-    pub fn assistant(text: impl Into<String>) -> Message {
+    pub fn system(text: impl Into<String>) -> Message {
         Message {
-            role: Role::Assistant,
+            role: Role::System,
             content: vec![ContentBlock::Text { text: text.into() }],
         }
     }
