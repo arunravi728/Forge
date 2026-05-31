@@ -1,9 +1,9 @@
 pub struct Config {
     pub api_key: String,
-    pub base_url: String, // e.g. http://localhost:11434 for Ollama
-    pub model: String,    // e.g. "qwen2.5-coder:32b"
+    pub base_url: String,
+    pub model: String,
     pub max_tokens: u32,
-    pub max_iterations: usize, // safety cap on agent loop iterations
+    pub max_iterations: usize,
 }
 
 impl Config {
